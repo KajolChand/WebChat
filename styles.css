@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background:url(background.jpg)no-repeat center center fixed ;
+    background: url(background.jpg) no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -46,7 +46,7 @@ body {
     margin: 5px 0;
     border-radius: 5px;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Align items at the start */
 }
 
 .bot {
@@ -57,21 +57,26 @@ body {
 .user {
     background-color: #d1e7dd;
     text-align: right;
-    justify-content: flex-end;
 }
 
-.bot-avatar {
+.avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     margin-right: 10px;
 }
 
-.options-container {
-    padding: 10px;
-    text-align: center;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ddd;
+.message-container {
+    display: flex;
+    align-items: center;
+}
+
+.bot-message .avatar {
+    margin-left: 10px; /* Adjust margin for bot avatar position */
+}
+
+.user-message .avatar {
+    margin-right: 10px; /* Adjust margin for user avatar position */
 }
 
 .option-dropdown {

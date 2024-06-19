@@ -18,20 +18,30 @@ const predefinedAnswers = {
     "What should I do if the WasteWise app is not updating waste levels?": "If the app is not updating waste levels, please check your internet connection and ensure that the app has the necessary permissions to access data. If the issue persists, contact our support team for assistance."
 };
 
-function appendMessage(message, sender) {
+function appendMessage(message, sender, avatarPath) {
     const messageElement = document.createElement('div');
     messageElement.className = `message ${sender}`;
     
+    const avatar = document.createElement('img');
+    avatar.src = avatarPath;
+    avatar.className = 'avatar';
+
+    const messageContainer = document.createElement('div');
+    messageContainer.className = 'message-container';
+
     if (sender === 'bot') {
-        const avatar = document.createElement('img');
-        avatar.src = 'avatar.png'; // Path to your bot avatar image
-        avatar.className = 'bot-avatar';
-        messageElement.appendChild(avatar);
+        messageContainer.classList.add('bot-message');
+    } else {
+        messageContainer.classList.add('user-message');
     }
+
+    messageContainer.appendChild(avatar);
 
     const textNode = document.createElement('span');
     textNode.textContent = message;
-    messageElement.appendChild(textNode);
+    messageContainer.appendChild(textNode);
+
+    messageElement.appendChild(messageContainer);
 
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -39,8 +49,9 @@ function appendMessage(message, sender) {
 
 function respondToMessage(message) {
     const response = predefinedAnswers[message] || "I'm sorry, I don't understand that.";
+    const botAvatar = 'avatar.png'; // Path to bot avatar image
     setTimeout(() => {
-        appendMessage(response, 'bot');
+        appendMessage(response, 'bot', botAvatar);
     }, 1000);
 }
 
@@ -55,7 +66,8 @@ function populateDropdown() {
     questionDropdown.addEventListener('change', () => {
         const selectedQuestion = questionDropdown.value;
         if (selectedQuestion) {
-            appendMessage(selectedQuestion, 'user');
+            const userAvatar = 'user.jpg'; // Path to user avatar image
+            appendMessage(selectedQuestion, 'user', userAvatar);
             respondToMessage(selectedQuestion);
             questionDropdown.selectedIndex = 0; // Reset dropdown
         }
@@ -64,6 +76,7 @@ function populateDropdown() {
 
 // Automatically send a welcome message from the bot and display options
 window.onload = () => {
-    appendMessage("Welcome! Choose a question to get started.", 'bot');
+    const botAvatar = 'avatar.png'; // Path to bot avatar image
+    appendMessage("Welcome! Choose a question to get started.", 'bot', botAvatar);
     populateDropdown();
 };
