@@ -35,8 +35,10 @@ body {
 }
 
 .logo {
-    height: 60px;
+    height: 80px;
     margin-right: 10px;
+    width : auto ;
+
 }
 
 .chat-box {
